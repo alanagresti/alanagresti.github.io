@@ -1,1 +1,1 @@
-Hello. This site contains the files that used to be at my home page at the University of Florida, www.stat.ufl.edu/~aa, which ceases to exist in April 2026.
+Hello. This site contains the files that used to be at my home page at the University of Florida, www.stat.ufl.edu/~aa, which ceases to exist in April 2026.  Please note that since I retired from the University of Florida in 2010, I check my email for that institution relatively infrequently.
