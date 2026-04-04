@@ -1,0 +1,145 @@
+<html>
+<title>Alan Agresti: 4504-Spring 2002</title>
+<body bgcolor="#DCDCDC" text="#000000"
+      link="#0000FF" vlink="#A020F0" alink="#FF0000">
+
+<TD>
+<APPLET codebase="http://www.stat.sc.edu/webstat/version2.0/" 
+code="webstat.class" archive="classes.zip" width=300
+height=35 > </APPLET>
+</TD>
+
+<h1>STA 4504-5503: CATEGORICAL DATA METHODS</h1>
+
+<p><h3><a href="syllabus-02.pdf">Syllabus</a> (PDF file)</h3>
+
+<p><h3>Instructor</h3>
+Alan Agresti, Department of Statistics
+
+<p><h3>Office Hours</h3>
+  204 Griffin-Floyd Hall: Monday & Wednesday,  3-5 pm, or by appointment
+
+<p><h3>Contact Information</h3>
+Phone number: (352) 392-1941 x 234, e-mail aa@stat.ufl.edu <br>
+
+
+
+<p><h3>Data Sets:</h3>
+
+
+<p> 
+<UL><h3>SAS Data Sets for Text Examples</h3>
+<a href="/~aa/intro-cda/appendix.html">SAS Datasets</a></UL>
+
+
+<p> 
+<UL><h3>Link to the General Social Survey</h3>
+<a href="http://www.icpsr.umich.edu/GSS/index.html">GSS</a></UL>
+
+<p><UL>I have found the GSS to be an excellent source of data for
+examples, and you may find it useful to generate data for your
+project.  You can see the codebook of all the questions they ask by
+clicking on one of the items under "Codebook Indexes" on the homepage
+(e.g., Mnemonic).  Clicking on the name of the variable in the
+mnemonic list shows marginal distributions of the responses in many
+years.  Dr. Brett Presnell of the Statistics Department at UF has
+prepared a useful document that shows how to download data from the
+GSS and then put it in a SAS program for analysis (e.g., to form
+contingency tables or to do logistic regression modeling).  See the
+pdf file on <a
+href="http://web.stat.ufl.edu/~presnell/Teaching/sta4504-2000sp/">Downloading
+and using data from the General Social Survey</a> in the Handouts
+section of his webpage for this course. </UL>
+
+
+<p><h3>Links about software</h3>
+
+<p> 
+<UL><h3>SAS:</h3> 
+
+<p>SAS is available in all the <a
+href="http://labs.circa.ufl.edu/cse.html">CIRCA labs</a>, such as CSE
+211.  You can get SAS for your home PC with a one-year license through
+the <a href="http://www.software.ufl.edu/sas/">Student Home-Use
+Program</a>
+
+<p>The CIRCA handout <a
+href="http://www.circa.ufl.edu/handouts/windows/sas.html">"SAS for
+Windows"</a> is useful for getting started.  It can also be helpful to
+use a primer such as "The Little SAS Book: A Primer" by L. Delwiche
+and S. Slaughter or "SAS System for Elementary Statistical Analysis"
+by S. Schlotzhauer and R. Littell.
+  
+<p>The SAS/STAT User's Guide contains more detailed information.  See
+<a href="http://docs.stat.ufl.edu/sasdoc/stat/index.htm">SAS/STAT
+guide</a>.  A link to SAS manuals is <a
+href="http://software.ufl.edu/sashtml/main.htm">SAS Manuals</a>.
+There you can find all the detail you need about PROCs we use in this
+course, such as PROC GENMOD, PROC LOGISTIC, and PROC FREQ.
+</UL>
+<p>
+
+
+
+<p> 
+<UL><h3>SPSS:</h3> A student version of SPSS is available at the
+Technology Hub for $73.  You can get it more cheaply for your home PC
+with a one-year license through the <a
+href="http://www.software.ufl.edu/spss/">Student Home-Use Program</a>
+</UL>
+<p>
+
+<p> 
+<UL><h3>R and S-Plus:</h3> R is free software, popular among
+statisticians because of its power and flexibility but harder to learn
+to use.  It is an open source version of S-Plus, and many S-Plus
+functions also work in R.  For details, see the <a
+href="http://www.r-project.org/"> R web site </a>.  This includes a
+link to manuals, such as "An Introduction to R", and to the archives
+in the Comprehensive R Archive Network (CRAN).
+
+For other useful information and links about R and S-Plus, see the
+homepages of the UF professors <a
+href="http://web.stat.ufl.edu/~presnell/">Dr.  Brett Presnell</a> or
+<a href="http://www.clas.ufl.edu/~jgill/s-language.help.html">Dr.
+Jeff Gill</a>.  Dr. Presnell also has a page on <a
+href="http://web.stat.ufl.edu/~presnell/Teaching/sta4504-2000sp/R/"> R
+for Categorical Data Analysis </a> from when he taught STA 4504-5503
+that has many examples of the use of R.  Some of these are for data
+sets in the text for this course.  </UL>
+<p>
+
+
+<p><h3>Exam 1 <a href="formulas1.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+<p><h3>Exam 2 <a href="formulas2.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+<p><h3>Exam 3 <a href="formulas3.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+<p>
+
+
+<!--a
+<UL>
+<li><a href="chap4.pdf"><b>c4</b></a>
+</UL>
+
+<UL>
+<li><a href="chap13.pdf"><b>c13</b></a>
+</UL>
+
+</a--> 
+
+
+<br><br><br>
+<p>
+<a href="/~aa/">Back to Alan Agresti's Home Page</a></p>
+</body>
+</html>
+
+
+
+
