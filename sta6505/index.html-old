@@ -1,0 +1,114 @@
+<html>
+<title>Alan Agresti: 6505, Spring 2004</title>
+<body bgcolor="#DCDCDC" text="#000000"
+      link="#0000FF" vlink="#A020F0" alink="#FF0000">
+
+<TD>
+<APPLET codebase="http://www.stat.sc.edu/webstat/version2.0/" 
+code="webstat.class" archive="classes.zip" width=300
+height=35 > </APPLET>
+</TD>
+
+<h1>STA 6505: ANALYSIS OF CATEGORICAL DATA</h1>
+
+<p><h3><a href="syllabus-04.pdf">Syllabus</a> (PDF file)</h3>
+
+<p><h3>Instructor</h3>
+Alan Agresti, Department of Statistics
+
+<p><h3>Office Hours</h3> 204 Griffin-Floyd Hall: Monday 2:30-4:30 pm,
+  Thursday 1:45-3:45, or by appointment
+
+<p><h3>Contact Information</h3>
+Phone number: (352) 392-1941 x 234, e-mail aa@stat.ufl.edu <br>
+
+
+
+<p> <UL><h3>Website for textbook</h3> The <a
+href="/~aa/cda/cda.html">CDA website</a> has details about
+various software for conducting categorical data analysis, datasets
+used in the text, and some corrections.</UL>
+
+
+
+
+<p><h3>Local links about software</h3>
+
+
+
+<p> 
+<UL><h3>SAS:</h3> 
+
+
+  
+<p>The SAS/STAT User's Guide contains detailed information.  See <a
+href="http://docs.stat.ufl.edu/sasdoc/stat/index.htm">SAS/STAT
+guide</a>.  A link to SAS manuals is <a
+href="http://software.ufl.edu/sashtml/main.htm">SAS Manuals</a>.
+There you can find all the detail you need about PROCs we use in this
+course, such as PROC GENMOD, PROC LOGISTIC, and PROC FREQ.
+</UL>
+<p>
+
+<p>SAS is available in all the <a
+href="http://labs.circa.ufl.edu/cse.html">CIRCA labs</a>, such as CSE
+211.  You can get SAS for your home PC with a one-year license through
+the <a href="http://www.software.ufl.edu/sas/">Student Home-Use
+Program</a>.  A license costs about $40 but is free to renew for as
+many years as you are at UF, and apparently a certain number of
+licences are free every year from UF's Software Licensing Services
+(from the UF Bookstore on a first come first serve basis).
+Alternatively, graduate students can get a grove account
+(www.grove.ufl.edu). This is a free account for grad students and
+allows access to such software as SAS
+(http://grove.ufl.edu/applications.shtml).
+
+
+<p> 
+<UL><h3>R and S-Plus:</h3> R is free software, popular among
+statisticians because of its power and flexibility but harder to learn
+to use.  It is an open source version of S-Plus, and many S-Plus
+functions also work in R.  For details, see the <a
+href="http://www.r-project.org/"> R web site </a>.  This includes a
+link to manuals, such as "An Introduction to R", and to the archives
+in the Comprehensive R Archive Network (CRAN).
+
+
+<p>
+
+<!--a
+
+
+<p><h3>Exam 1 <a href="formulas1.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+<p><h3>Exam 2 <a href="formulas2.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+<p><h3>Exam 3 <a href="formulas3.pdf">Formula page</a> (PDF file; this
+page will be attached to the exam)</h3> </ul>
+
+</a--> 
+
+
+<!--a
+<UL>
+<li><a href="chap4.pdf"><b>c4</b></a>
+</UL>
+
+<UL>
+<li><a href="chap13.pdf"><b>c13</b></a>
+</UL>
+
+</a--> 
+
+
+<br><br><br>
+<p>
+<a href="/~aa/">Back to Alan Agresti's Home Page</a></p>
+</body>
+</html>
+
+
+
+
