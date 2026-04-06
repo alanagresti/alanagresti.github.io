@@ -1,0 +1,98 @@
+
+
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0.00truein}
+\setlength{\evensidemargin}{0.00truein}
+\setlength{\textwidth}{6.250truein}
+\setlength{\topmargin}{-0.0truein}
+\setlength{\textheight}{8.5truein}
+\def\theequation{\thechapter. \arabic{section}. \arabic{equation}}
+
+\pagestyle{empty}
+
+\input newcommand
+
+% \newcommand{\bfbeta}{\bm{\beta}}
+\usepackage{mathrsfs}
+
+\usepackage{bm}
+
+\usepackage{makeidx}
+
+%\usepackage{multind}
+
+\usepackage{graphicx}
+
+
+\begin{document}
+
+\ \\
+{\bf \large Corrections to second edition  \\ [.1in]
+  {\em Analysis of Ordinal Categorical Data} }
+
+\ \\
+\ \\
+Thanks to those who have pointed out errors, including Garry Anderson,
+David Hoaglin, Theo Nijsse, Nigel Smeeton, and Marek Omelka.  Some of
+these errors have, I hope, been corrected in later printings of the
+book.
+
+\ \\
+\ \\
+p. 6, Figure 1.1: In the label on the vertical axis of the 
+right-hand plot, the y should not have an asterisk. \\
+\ \\
+p. 28: In Table 2.5 and in the formula for SE, 1698 should be 1701. \\
+\ \\
+p. 35: The count for the (mismatch, extreme) cell should be 1, as
+should the total in that column. \\
+\ \\
+p. 89: The sentence with the third displayed equation, namely ``The
+corresponding model for the category probabilities is ...'' should
+be deleted.  The correct formula for the model, which is clearer 
+following the discussion in Section 4.1.3, is
+%
+\[
+\pi_j(\mathbf{x}) = \frac{\exp(\sum_{k=j}^{c-1} \alpha_k 
++ (c-j)\bm{\beta}'\mathbf{x})}
+{1 + \sum_{k=1}^{c-1} \exp(\sum_{k'=j}^{c-1}\alpha_{k'} 
++ (c-j)\bm{\beta}'\mathbf{x})}, \quad
+j = 1, 2, \ldots , c-1.
+\]
+%
+\ \\
+p. 139: The intercept for the mean response model, reported as
+$-5.08$, should not have the minus sign. \\
+\ \\
+p. 153: For the output shown in Table 6.3, the column scores
+were (3, 2, 1) rather than (1, 2, 3), which is why $\hat\beta
+= 0.390$ instead of $\hat\beta = - 0.390$ as stated in the text.
+Likewise, on p. 154, the marginal mean reported for opinion
+about astrology is based on the scores (3, 2, 1), which is why
+the mean is reported as 2.63, instead of 1.37, as it would be for
+the scores (1, 2, 3).  The standardized scores should then
+also have reverse order and reversed sign. \\
+\ \\
+p. 217: According to an email I received from Veronika Ga\^sparovi\^cov\'a,
+she and her thesis advisor Dr.\ J\'an Somor\^cík at Comenius University Bratislava in Slovakia believe that under the first square root in the formula for $\phi_{ij}$, $(1 - \sum_a \pi_{a+}^2)(1 - \sum_b \pi_{+b}^2)$ should be $(1 - \sum_a \pi_{a+}^2)/(1 - \sum_b \pi_{+b}^2)$, which apparently then agrees with the formula given in my 1976 article about ordinal measures of association.  I myself have not been able to check this.\\
+\ \\
+p. 230: In the example, the second sample mean should be 3.789
+(instead of 3.799). \\
+\ \\
+p. 250: In the displayed formulas for popular choices for the weights
+for weighted kappa, 1 should be separate rather than in the numerator
+of the ratios shown; e.g., $w_{ij} = 1 - \frac{|i-j|}{c-1}$. \\
+\ \\
+p. 290: Ten lines from the bottom, ``estimated time at time 1''
+should be ``estimated odds at time 1''. \\
+\ \\
+p. 332: For the ML analysis, the SE is reported as 0.395 in the text
+but 0.396 in Table 11.5.  Each is actually correct, as Newton-Raphson
+(observed information) yields 0.395 whereas Fisher scoring (expected
+information) yields 0.396. \\
+
+\ \\
+
+
+
+\end{document}
