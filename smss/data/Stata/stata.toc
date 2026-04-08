@@ -1,9 +1,0 @@
-d Stata Datasets for the Statistial Methods for the Social Sciences, 5th ed.
-d
-d To download datasets for the book, click the -datasets- link and follow
-d the instructions for the package.
-d
-d distribution-date 11jan2016
-d Copyright 2016 ??
-
-p datasets
