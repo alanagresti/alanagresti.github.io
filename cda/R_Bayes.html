@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta8 (1.46)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>bayes</TITLE>
+<META NAME="description" CONTENT="bayes">
+<META NAME="keywords" CONTENT="bayes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta8">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="bayes.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html2"
+  HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/local/lib/latex2html/icons/next.gif"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/local/lib/latex2html/icons/up_g.gif"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/local/lib/latex2html/icons/prev_g.gif">   
+<BR>
+<B> Next:</B> <A NAME="tex2html3"
+  HREF="node1.html">About this document ...</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<P>
+R code for Bayesian tail confidence interval for p1 - p2 with
+confidence level = conflev, using independent beta(a, b) and
+beta(c, d) priors, based on binomial variates (x1, x2) with
+sample sizes (n1, n2).
+<PRE>
+-----------------------------------------------------------------------------
+# approximate tail method using simulation
+diff.app&lt;- function(a1,b1,c1,d1,conflev,nsim=100000)
+{ z1 &lt;- rbeta(nsim, a1,b1)
+  z2 &lt;- rbeta(nsim, c1,d1)
+  z &lt;- z1 - z2
+  z &lt;- sort(z)
+  lq &lt;- nsim * (1-conflev)/2
+  uq &lt;- nsim * (1 - (1-conflev)/2)
+  ci &lt;- array(0,2)
+  ci[1] &lt;- z[lq]
+  ci[2] &lt;- z[uq]
+  return(ci) }
+# Bayes tail interval with beta priors
+fct.F1&lt;- function(x,t,a1,b1,c1,d1){dbeta(x,c1,d1)*pbeta(x+t,a1,b1)}
+fct.F2&lt;- function(x,t,a1,b1,c1,d1){dbeta(x,c1,d1)*(1-pbeta(x+t,a1,b1))}
+diff.F &lt;- function(t,a1,b1,c1,d1)
+{ if(t &lt; 0)
+  Fvalue &lt;- integrate(fct.F1,-t,1,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  else
+  Fvalue &lt;- 1-integrate(fct.F2,0,1-t,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  return(Fvalue) }
+diff.fct &lt;- function(ab,a1,b1,c1,d1,conflev)
+{ abs(diff.F(ab[2],a1,b1,c1,d1) - (1 - (1-conflev)/2))+
+  abs(diff.F(ab[1],a1,b1,c1,d1) - (1-conflev)/2) }
+diffCI &lt;- function(x1,n1,x2,n2,a,b,c,d,conflev=.95)
+{ a1 &lt;- a + x1
+  b1 &lt;- b + n1 - x1
+  c1 &lt;- c + x2
+  d1 &lt;- d + n2 - x2
+  start &lt;- diff.app(a1,b1,c1,d1,conflev)
+  tailci &lt;- optim(start,diff.fct,a1=a1,b1=b1,c1=c1,d1=d1,
+          conflev=conflev,control=list(maxit=20000))$par
+  if(tailci[1] &lt; -1) tailci[1]  &lt;- -1
+  if(tailci[2] &gt;  1) tailci[2]  &lt;- 1
+  return(tailci) }
+-----------------------------------------------------------------------------
+</PRE>
+
+<P>
+ 
+<BR>
+<P>
+
+<PRE>
+-----------------------------------------------------------------------------
+# R code for Bayesian HPD confidence interval for p_1 - p_2
+# with confidence level = conflev, using independent beta(a, b) and
+# beta(c, d) priors, based on
+# binomial variates (x_1, x_2) with sample sizes (n_1, n_2).
+
+# approximate HPD confidence interval
+diff.app&lt;- function(a1,b1,c1,d1,conflev)
+{
+  mu1 &lt;- a1/(a1+b1)
+  mu2 &lt;- c1/(c1+d1)
+  v1 &lt;- mu1*(1-mu1)/(a1 + b1)
+  v2 &lt;- mu2*(1-mu2)/(c1 + d1)
+  z  &lt;- qnorm(1-(1-conflev)/2)
+  ci &lt;- array(0,2)
+  ci[1] &lt;- mu1-mu2 - z*sqrt(v1+v2)
+  ci[2] &lt;- mu1-mu2 + z*sqrt(v1+v2)
+  return(ci)
+}
+
+# Bayes HPD interval with beta priors
+fct.F1&lt;- function(x,t,a1,b1,c1,d1){
+  dbeta(x,c1,d1)*pbeta(x+t,a1,b1)}
+
+fct.F2&lt;- function(x,t,a1,b1,c1,d1){
+  dbeta(x,c1,d1)*(1-pbeta(x+t,a1,b1))}
+
+diff.F &lt;- function(t,a1,b1,c1,d1)
+{ if(t &lt; 0)
+  Fvalue &lt;- integrate(fct.F1,-t,1,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  else
+  Fvalue &lt;- 1-integrate(fct.F2,0,1-t,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  return(Fvalue)
+}
+
+fct.f&lt;- function(x,t,a1,b1,c1,d1){
+ dbeta(x,c1,d1)*dbeta(x+t,a1,b1)
+}
+
+diff.f &lt;- function(t,a1,b1,c1,d1)
+{
+  if(t &lt; -1) fvalue &lt;- 100
+  else if(t &gt; 1)  fvalue &lt;- 100
+  else if((t &gt;= -1) &amp;&amp; (t &lt;= 0))
+    fvalue &lt;- integrate(fct.f,-t,1,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  else
+    fvalue &lt;- integrate(fct.f,0,1-t,t=t,a1=a1,b1=b1,c1=c1,d1=d1)$value
+  return(fvalue)
+}
+
+
+diff &lt;- function(ab,a1,b1,c1,d1,conflev)
+{
+  1000*abs(diff.F(ab[2],a1,b1,c1,d1) -
+      diff.F(ab[1],a1,b1,c1,d1) - conflev)+
+  abs(diff.f(ab[1],a1,b1,c1,d1) -
+        diff.f(ab[2],a1,b1,c1,d1))
+}
+
+diffCI &lt;- function(x1,n1,x2,n2,a,b,c,d,conflev=.95)
+{
+  y &lt;- x1
+  if( y &gt; n1/2 ) {
+   x2 &lt;- n2-x2
+   x1 &lt;- n1-x1
+  }
+  a1 &lt;- a + x1
+  b1 &lt;- b + n1 - x1
+  c1 &lt;- c + x2
+  d1 &lt;- d + n2 - x2
+  start &lt;- diff.app(a1,b1,c1,d1,conflev)
+  hdrci &lt;- optim(start,diff,a1=a1,b1=b1,c1=c1,d1=d1,conflev=conflev)$par
+  if(hdrci[1] &lt; -1) hdrci[1]  &lt;- -1
+  if(hdrci[2] &gt;  1) hdrci[1]  &lt;- 1
+   if( y &gt; n1/2 ) {
+   ci &lt;- hdrci
+   hdrci[1] &lt;- -ci[2]
+   hdrci[2] &lt;- -ci[1]
+  }
+  return(hdrci)
+}
+</PRE>
+
+<P>
+R code for Bayesian tail confidence interval for relative risk
+p1/p2 with confidence level = conflev, using independent beta(a,
+b) and beta(c, d) priors, based on binomial variates (x1, x2)
+with sample sizes (n1, n2).
+<PRE>
+-----------------------------------------------------------------------------
+# riskCI generates a Bayesian tail confidence interval for p_1/ p_2
+# with confidence level = conflev, using independent beta(a, b) and
+# beta(c, d) priors, based on
+# binomial variates (x1, x2) with sample sizes (n1, n2).
+
+
+# approximate tail method using simulation
+risk.app&lt;- function(a1,b1,c1,d1,conflev,nsim=100000)
+{
+  z1 &lt;- rbeta(nsim, a1,b1)
+  z2 &lt;- rbeta(nsim, c1,d1)
+  z &lt;- z1/z2
+  z &lt;- sort(z)
+  lq &lt;- nsim * (1-conflev)/2
+  uq &lt;- nsim * (1 - (1-conflev)/2)
+  ci &lt;- array(0,2)
+  ci[1] &lt;- z[lq]
+  ci[2] &lt;- z[uq]
+  return(ci)
+}
+
+# Bayes tail interval with beta priors
+
+fct.F1&lt;- function(x,t,a1,b1,a2,b2){
+ dbeta(x,a2,b2)*pbeta(x*t,a1,b1)}
+
+fct.F2&lt;- function(x,t,a1,b1,a2,b2){
+ dbeta(x,a2,b2)*(1-pbeta(x*t,a1,b1))}
+
+risk.F &lt;- function(t,a1,b1,a2,b2)
+{
+  if((0&lt;t) &amp;&amp; (t&lt;=1)){
+    return(integrate(fct.F1,0,1,t=t,a1=a1,b1=b1,a2=a2,b2=b2)$value)
+  }
+  else{
+    return(1-integrate(fct.F2,0,1/t,t=t,a1=a1,b1=b1,a2=a2,b2=b2)$value)
+  }
+}
+
+risk.fct &lt;- function(ab,a1,b1,c1,d1,conflev)
+{
+  abs(risk.F(ab[2],a1,b1,c1,d1) - (1 - (1-conflev)/2)) +
+  abs(risk.F(ab[1],a1,b1,c1,d1) -(1-conflev)/2)
+}
+
+riskCI &lt;- function(x1,n1,x2,n2,a,b,c,d,conflev=.95)
+{
+  a1 &lt;- a + x1
+  b1 &lt;- b + n1 - x1
+  c1 &lt;- c + x2
+  d1 &lt;- d + n2 - x2
+  start &lt;- risk.app(a1,b1,c1,d1,conflev)
+  tailci &lt;- optim(start,risk.fct,a1=a1,b1=b1,c1=c1,d1=d1,
+            conflev=conflev,control=list(maxit=20000))$par
+  if(tailci[1] &lt; 0) tailci[1]  &lt;- 0
+  return(tailci)
+}
+-----------------------------------------------------------------------------
+</PRE>
+
+<P>
+ 
+<BR>
+<P>
+R code for Bayesian tail confidence interval for odds ratio with
+confidence level = conflev, using independent beta(a, b) and
+beta(c, d) priors, based on binomial variates (x1, x2) with
+sample sizes (n1, n2).
+<PRE>
+-----------------------------------------------------------------------------
+# orCI generates a Bayesian tail confidence interval for
+# p1(1-p2)/(p2(1-p1))  with confidence level = conflev, using
+# independent beta(a, b) and  beta(c, d) priors, based on
+# binomial variates (x1, x2) with sample sizes (n1, n2).
+
+
+# approximate tail method using simulation
+
+or.app&lt;- function(a1,b1,c1,d1,conflev,nsim=1000000)
+{
+  z1 &lt;- rf(nsim, 2*a1,2*b1)
+  z2 &lt;- rf(nsim, 2*c1,2*d1)
+  a &lt;- (d1/c1)/(b1/a1)
+  z &lt;- a*z1/z2
+  z &lt;- sort(z)
+  lq &lt;- nsim * (1-conflev)/2
+  uq &lt;- nsim * (1 - (1-conflev)/2)
+  ci &lt;- array(0,2)
+  ci[1] &lt;- z[lq]
+  ci[2] &lt;- z[uq]
+  return(ci)
+}
+
+
+# Bayes tail interval with beta priors
+
+fct.F&lt;- function(x,t,a1,b1,a2,b2){
+  c &lt;- (b2/a2)/(b1/a1)
+  df(x,2*a2,2*b2)*pf(x*t/c,2*a1,2*b1)
+}
+
+or.F &lt;- function(t,a1,b1,a2,b2)
+{
+  return(integrate(fct.F,0,Inf,t=t,a1=a1,b1=b1,a2=a2,b2=b2)$value)
+}
+
+or.fct &lt;- function(ab,a1,b1,c1,d1,conflev)
+{
+ abs(or.F(ab[2],a1,b1,c1,d1) - (1 - (1-conflev)/2))+
+ abs(or.F(ab[1],a1,b1,c1,d1) - (1-conflev)/2)
+}
+
+orCI &lt;- function(x1,n1,x2,n2,a,b,c,d,conflev=.95)
+{
+  if(x2!=n2){
+  a1 &lt;- a + x1
+  b1 &lt;- b + n1 - x1
+  c1 &lt;- c + x2
+  d1 &lt;- d + n2 - x2
+  start &lt;- or.app(a1,b1,c1,d1,conflev)
+  tailci &lt;- optim(start,or.fct,a1=a1,b1=b1,c1=c1,d1=d1,
+           conflev=conflev,control=list(maxit=20000))$par
+  if(tailci[1] &lt; 0) tailci[1]  &lt;- 0 }
+  else{
+  a1 &lt;- a + n1 - x1
+  b1 &lt;- b +  x1
+  c1 &lt;- c + n2 - x2
+  d1 &lt;- d + x2
+  start &lt;- or.app(a1,b1,c1,d1,conflev)
+  tailci1 &lt;- optim(start,or.fct,a1=a1,b1=b1,c1=c1,d1=d1,
+           conflev=conflev,control=list(maxit=20000))$par
+  if(tailci[1] &lt; 0) tailci[1]  &lt;- 0
+  tailci &lt;- array(0,2)
+  tailci[1] &lt;- 1/ tailci1[2]
+  tailci[2] &lt;- 1/ tailci1[1]
+ }
+  return(tailci)
+}
+-----------------------------------------------------------------------------
+</PRE>
+
+<P>
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL>
+<LI><A NAME="tex2html4"
+  HREF="node1.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+Alan Agresti
+2003-12-09
+</ADDRESS>
+</BODY>
+</HTML>
